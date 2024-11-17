@@ -1,0 +1,28 @@
+fun fib_1 (n) = {
+    a = 0;
+    b = 1;
+    (i=1; i<=n; i=i+1)?*{
+        tmp = b;
+        b = a + b;
+        a = tmp;
+    };
+    print(a);
+};
+
+fun fib_2(n, a, b, res) = {
+    (0 == n)?{
+        res[0] = a;
+    }:{
+        (1 == n)?{
+            res[0] = b;
+        }:{
+            fib_2(n+(-1), b, b + a, res);
+        };
+    };
+};
+
+fib_1(30);
+
+res = [0,0];
+fib_2(30,0,1, res);
+print(res[0]);

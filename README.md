@@ -75,6 +75,8 @@ The library can be configured through environment variables:
 
 - `OLLAMA_MODEL`: The model to use for translation (default: "qwen2.5-coder")
 
+- `OLLAMA_URL`: Ollama endpoint (default "http://localhost:11434/api/generate")
+
 ## Limitations
 
 - Translation quality depends on the model used

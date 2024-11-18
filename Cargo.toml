@@ -1,6 +1,6 @@
 [package]
 name = "aleph_ollama"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license-file="LICENSE"
 repository="https://github.com/aleph-lang/aleph_ollama"

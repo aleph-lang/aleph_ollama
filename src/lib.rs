@@ -9,7 +9,7 @@ pub fn translate_code(file_path: &str, target_language: &str) -> Result<String, 
     let model = env::var("OLLAMA_MODEL").unwrap_or_else(|_| "qwen2.5-coder".to_string());
 
     let client = Client::new();
-    let url = "http://localhost:11434/api/generate";
+    let url = env::var("OLLAMA_URL").unwrap_or_else(|_| "http://localhost:11434/api/generate".to_string());
     let body = json!({
         "model": model,
         "prompt": format!(

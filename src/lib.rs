@@ -77,19 +77,18 @@ fn parse_response(response_text: &str) -> Result<String, TranslationError> {
     Ok(clean_result.trim().to_string())
 }
 
-/// Translates the code from a file to the target language using the Ollama API.
+/// Translates the code from a string to the target language using the Ollama API.
 ///
 /// # Arguments
 ///
-/// * `file_path` - A string slice that holds the path to the file containing the code to be translated.
+/// * `code` - A string containing the code to be translated.
 /// * `target_language` - A string slice that holds the target language for the translation.
 ///
 /// # Returns
 ///
 /// * `Ok(String)` - The translated code as a string.
 /// * `Err(TranslationError)` - An error that occurred during the translation process.
-pub fn translate_code(file_path: &str, target_language: &str) -> Result<String, TranslationError> {
-    let code = fs::read_to_string(file_path)?;
+pub fn translate_code_from_string(code: &str, target_language: &str) -> Result<String, TranslationError> {
     let config = Config::from_env();
     let client = Client::new();
     let body = json!({
@@ -116,5 +115,21 @@ pub fn translate_code(file_path: &str, target_language: &str) -> Result<String, 
     let translated_code = parse_response(&response_text)?;
 
     Ok(translated_code)
+}
+
+/// Translates the code from a file to the target language using the Ollama API.
+///
+/// # Arguments
+///
+/// * `file_path` - A string slice that holds the path to the file containing the code to be translated.
+/// * `target_language` - A string slice that holds the target language for the translation.
+///
+/// # Returns
+///
+/// * `Ok(String)` - The translated code as a string.
+/// * `Err(TranslationError)` - An error that occurred during the translation process.
+pub fn translate_code(file_path: &str, target_language: &str) -> Result<String, TranslationError> {
+    let code = fs::read_to_string(file_path)?;
+    translate_code_from_string(&code, target_language)
 }
 
